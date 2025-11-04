@@ -17,3 +17,11 @@ RUN pecl install redis \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+# Fixes write permissions
+RUN set -eux; \
+    mkdir -p storage/framework/{cache,data,sessions,testing,views} \
+             bootstrap/cache \
+             vendor; \
+    chown -R www-data:www-data storage bootstrap/cache vendor; \
+    chmod -R ug+rwX storage bootstrap/cache vendor
