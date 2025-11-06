@@ -41,7 +41,7 @@ class ProjectController extends Controller
 
         $users = \App\Models\User::select('id', 'name')->get();
 
-        return Inertia::render('Project/Show', [
+        return Inertia::render('Projects/Show', [
             'project' => $project,
             'users' => $users,
             'statuses' => [
