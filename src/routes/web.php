@@ -25,6 +25,9 @@ Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('pro
 // Route for adding a new task to a project
 Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
+// Tasks update and delete routes
+Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
