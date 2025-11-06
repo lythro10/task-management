@@ -43,15 +43,15 @@ const props = defineProps({
                             
                             <div class="text-sm mt-2 space-y-1">
                                 <p class="flex items-center">
-                                    <span class="text-green-600 mr-2">✅</span> 
+                                    
                                     Done: <strong class="ml-1">{{ project.summary.done }}</strong>
                                 </p>
                                 <p class="flex items-center">
-                                    <span class="text-yellow-500 mr-2">🚧</span> 
+                                    
                                     In Progress: <strong class="ml-1">{{ project.summary.in_progress }}</strong>
                                 </p>
                                 <p class="flex items-center">
-                                    <span class="text-red-500 mr-2">⏳</span> 
+                                    
                                     Pending: <strong class="ml-1">{{ project.summary.pending }}</strong>
                                 </p>
                             </div>
