@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+    
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
 // OLD DASHBOARD ROUTE
 // Route::get('/dashboard', function () {
