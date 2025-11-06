@@ -38,6 +38,7 @@ class ProjectController extends Controller
             abort(403, 'Unauthorized action.');
         }
         $project->load(['tasks.assignee']);
+        $project->load(['owner', 'tasks.assignee']);
 
         $users = \App\Models\User::select('id', 'name')->get();
 
