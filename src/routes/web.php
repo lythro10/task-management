@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -21,12 +22,8 @@ Route::get('/dashboard', [ProjectController::class, 'index'])
     ->name('dashboard');
     
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-
-// OLD DASHBOARD ROUTE
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
+// Route for adding a new task to a project
+Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 
 Route::middleware('auth')->group(function () {
