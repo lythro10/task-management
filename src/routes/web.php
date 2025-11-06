@@ -29,6 +29,9 @@ Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name
 Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+// Project Create route
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
