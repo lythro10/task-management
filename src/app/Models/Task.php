@@ -19,6 +19,10 @@ class Task extends Model
         'assigned_to'
     ];
 
+    public const STATUS_PENDING     = 'pending';
+    public const STATUS_IN_PROGRESS = 'in_progress'; 
+    public const STATUS_COMPLETED   = 'done';
+
     // Get the Project that the Task belongs to.
     public function project(): BelongsTo
     {
