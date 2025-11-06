@@ -83,16 +83,43 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
         //
+        if (Auth::id() !== $task->project->owner_id) {
+            abort(403, 'You do not have permission to modify tasks in this project.');
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'assigned_to' => ['required', 'exists:users,id'],
+            'status' => [
+                'required',
+                Rule::in([Task::STATUS_PENDING, Task::STATUS_IN_PROGRESS, Task::STATUS_COMPLETED]),
+            ],
+        ]);
+
+        $task->update($validated);
+
+        return redirect()->route('projects.show', $task->project_id)->with('success', 'Task updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
         //
+        if (Auth::id() !== $task->project->owner_id) {
+            abort(403, 'You do not have permission to delete tasks from this project.');
+        }
+
+        $project = $task->project;
+        
+        $task->delete();
+
+        return redirect()->route('projects.show', $project)->with('success', 'Task deleted successfully.');
     }
 }

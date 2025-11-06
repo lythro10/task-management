@@ -1,17 +1,27 @@
 <script setup>
 import TaskEditForm from '@/Components/TaskEditForm.vue'; 
+import { ref } from 'vue';
+import { router } from '@inertiajs/vue3';
+
 
 const props = defineProps({
     tasks: Array,
     users: Array,
     statuses: Object,
 });
-
+const editingTask = ref(null); 
 
 const deleteTask = (taskId) => {
-    if (confirm('Are you sure you want to delete this task?')) {
-     
-        alert(`Task deletion for ID ${taskId} needs backend implementation.`);
+    if (confirm('Are you sure you want to permanently delete this task?')) {
+        router.delete(route('tasks.destroy', taskId), {
+            preserveScroll: true, 
+            onSuccess: () => {
+                
+            },
+            onError: (errors) => {
+                alert('Failed to delete task: ' + errors.error);
+            }
+        });
     }
 }
 </script>
