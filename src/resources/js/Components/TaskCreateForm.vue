@@ -5,30 +5,34 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 const props = defineProps({
     projectId: Number,
     users: Array,
-    statuses: Object, 
+    // FIX 1: Change Object to Array to match ProjectController output
+    statuses: Array, 
 });
 
 const emit = defineEmits(['taskCreated']);
-
 
 const form = useForm({
     title: '',
     description: '',
     due_date: '',
     assigned_to: props.users[0]?.id || '',
-    status: props.statuses.pending, 
+    // FIX 2: Access status by index since it's an array (or use the known string value)
+    status: props.statuses[0] || 'pending', 
 });
 
 
 const submit = () => {
  
     form.post(route('tasks.store', props.projectId), {
-        preserveScroll: true,
+        // We rely on the backend redirect to refresh the task list, 
+        // so we remove preserveScroll to ensure a full refresh.
+        // preserveScroll: true, 
   
         onSuccess: () => {
          
             form.reset();
-            emit('taskCreated');
+            // This hides the form in the parent component
+            emit('taskCreated'); 
         },
         onStart: () => form.clearErrors(),
     });
@@ -70,8 +74,8 @@ const submit = () => {
                 <label for="status" class="block text-sm font-medium text-gray-700">Status*</label>
                 <select id="status" v-model="form.status" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option v-for="(value, key) in statuses" :key="key" :value="value">
-                        {{ key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ') }}
+                    <option v-for="status in statuses" :key="status" :value="status">
+                        {{ status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ') }}
                     </option>
                 </select>
                 <p v-if="form.errors.status" class="text-sm text-red-600 mt-1">{{ form.errors.status }}</p>
