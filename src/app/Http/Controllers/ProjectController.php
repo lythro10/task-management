@@ -52,4 +52,23 @@ class ProjectController extends Controller
             ],
         ]);
     }
+
+
+    public function store(Request $request)
+    {
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $project = Project::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'owner_id' => Auth::id(), // Assign the authenticated user as the owner
+        ]);
+
+        return redirect()->route('projects.show', $project)
+                         ->with('success', 'Project created successfully!');
+    }
 }
