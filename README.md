@@ -39,3 +39,23 @@ Username: owner@example.com
 Password: password
 
 
+## Projects Dashboard
+![Dashboard showing project ](assets/projects-dashboard.png)
+
+## Tasks of Project
+![Tasks within a Project ](assets/tasks-project.png)
+
+## Add Task
+![Add a task to a project ](assets/add_tasks.png)
+
+## Details of Task
+![Deatails of Task ](assets/add_tasks_1.png)
+
+## Task added in array
+![Task added in array ](assets/task_added.png)
+
+## Create new Project
+![Create new Project from Dashboard](assets/create-new-project.png)
+
+## New Project added in List
+![Added Project in List](assets/new-project added.png)
