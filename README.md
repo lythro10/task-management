@@ -58,4 +58,4 @@ Password: password
 ![Create new Project from Dashboard](assets/create-new-project.png)
 
 ## New Project added in List
-![Added Project in List](assets/new-project added.png)
+![Added Project in List](assets/new-project_added.png)
