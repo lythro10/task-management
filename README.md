@@ -3,9 +3,11 @@
 Foobar is a Python library for dealing with word pluralization.
 
 ## Installation
-
+```bash
 git clone https://github.com/lythro10/task-management.git
 cd task-management
+```
+
 
 ```bash
 docker compose up -d --build
